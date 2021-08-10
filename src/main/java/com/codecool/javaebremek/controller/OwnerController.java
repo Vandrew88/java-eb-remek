@@ -1,5 +1,6 @@
 package com.codecool.javaebremek.controller;
 
+import com.codecool.javaebremek.model.Animal;
 import com.codecool.javaebremek.model.Owner;
 import com.codecool.javaebremek.service.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,13 @@ public class OwnerController {
         return ownerService.findById(id);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         ownerService.deleteById(id);
+    }
+
+    @GetMapping("/{ownerId}/animals")
+    public List<Animal> getAnimalsByOwnersId(@PathVariable Long ownerId) {
+        return ownerService.getAnimalsByOwnersId(ownerId);
     }
 }

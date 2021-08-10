@@ -35,7 +35,7 @@ public class AnimalController {
         return animalService.findById(id);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         animalService.deleteById(id);
     }

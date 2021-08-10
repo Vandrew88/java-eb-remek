@@ -1,5 +1,6 @@
 package com.codecool.javaebremek.controller;
 
+import com.codecool.javaebremek.model.Animal;
 import com.codecool.javaebremek.model.Vet;
 import com.codecool.javaebremek.service.VetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,13 @@ public class VetController {
         return vetService.findById(id);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         vetService.deleteById(id);
+    }
+
+    @GetMapping("/{vetId}/animals")
+    public List<Animal> getAnimalsByVetsId(@PathVariable Long vetId) {
+        return vetService.getAnimalsByVetsId(vetId);
     }
 }

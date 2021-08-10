@@ -1,5 +1,6 @@
 package com.codecool.javaebremek.service;
 
+import com.codecool.javaebremek.model.Animal;
 import com.codecool.javaebremek.model.Owner;
 import com.codecool.javaebremek.repository.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,9 @@ public class OwnerService {
 
     public void deleteById(Long id) {
         ownerRepository.deleteById(id);
+    }
+
+    public List<Animal> getAnimalsByOwnersId(Long ownerId) {
+        return ownerRepository.findById(ownerId).orElseThrow().getAnimals();
     }
 }

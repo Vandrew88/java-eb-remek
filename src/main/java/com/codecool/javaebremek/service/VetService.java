@@ -1,5 +1,6 @@
 package com.codecool.javaebremek.service;
 
+import com.codecool.javaebremek.model.Animal;
 import com.codecool.javaebremek.model.Vet;
 import com.codecool.javaebremek.repository.VetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,9 @@ public class VetService {
 
     public void deleteById(Long id) {
         vetRepository.deleteById(id);
+    }
+
+    public List<Animal> getAnimalsByVetsId(Long vetId) {
+        return vetRepository.findById(vetId).orElseThrow().getAnimals();
     }
 }
