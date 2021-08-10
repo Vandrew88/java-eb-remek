@@ -37,11 +37,11 @@ public class VetService {
         return vetRepository.save(vet);
     }
 
-    public Optional<Vet> findById(Long aLong) {
-        return vetRepository.findById(aLong);
+    public Optional<Vet> findById(Long id) {
+        return vetRepository.findById(id);
     }
 
-    public void deleteById(Long aLong) {
-        vetRepository.deleteById(aLong);
+    public void deleteById(Long id) {
+        vetRepository.deleteById(id);
     }
 }

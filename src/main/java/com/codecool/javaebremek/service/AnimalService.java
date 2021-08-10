@@ -37,11 +37,11 @@ public class AnimalService {
         return animalRepository.save(animal);
     }
 
-    public Optional<Animal> findById(Long aLong) {
-        return animalRepository.findById(aLong);
+    public Optional<Animal> findById(Long id) {
+        return animalRepository.findById(id);
     }
 
-    public void deleteById(Long aLong) {
-        animalRepository.deleteById(aLong);
+    public void deleteById(Long id) {
+        animalRepository.deleteById(id);
     }
 }

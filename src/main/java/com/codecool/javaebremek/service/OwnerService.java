@@ -37,11 +37,11 @@ public class OwnerService {
         return ownerRepository.save(owner);
     }
 
-    public Optional<Owner> findById(Long aLong) {
-        return ownerRepository.findById(aLong);
+    public Optional<Owner> findById(Long id) {
+        return ownerRepository.findById(id);
     }
 
-    public void deleteById(Long aLong) {
-        ownerRepository.deleteById(aLong);
+    public void deleteById(Long id) {
+        ownerRepository.deleteById(id);
     }
 }
