@@ -4,10 +4,12 @@ import com.codecool.javaebremek.model.Animal;
 import com.codecool.javaebremek.model.Owner;
 import com.codecool.javaebremek.service.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/owners")
@@ -17,23 +19,34 @@ public class OwnerController {
     private OwnerService ownerService;
 
     @GetMapping
-    public List<Owner> findAll() {
-        return ownerService.findAll();
+    public ResponseEntity<?> findAll() {
+        return ResponseEntity.ok(ownerService.findAll());
     }
 
     @PostMapping
-    public Owner add(@RequestBody Owner owner) {
-        return ownerService.add(owner);
+    public ResponseEntity<?> add(@RequestBody @Valid Owner owner, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(ownerService.add(owner));
     }
 
     @PutMapping("/{id}")
-    public Owner updateById(@PathVariable Long id, @RequestBody Owner owner) {
-        return ownerService.updateById(id, owner);
+    public ResponseEntity<?> updateById(@PathVariable Long id, @RequestBody @Valid Owner owner, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
+        try {
+            Owner result = ownerService.updateById(id, owner);
+            return ResponseEntity.ok(result);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/{id}")
-    public Optional<Owner> findById(@PathVariable Long id) {
-        return ownerService.findById(id);
+    public ResponseEntity<?> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(ownerService.findById(id));
     }
 
     @DeleteMapping("/{id}")
